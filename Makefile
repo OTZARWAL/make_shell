@@ -4,7 +4,8 @@ SANITIZE = -fsanitize=address -g
 
 
 RM = rm -rf
-SRC = main.c
+SRC = main.c \
+	utilities.c \
 
 DEPENDS = libft/libft.a
 
