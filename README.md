@@ -24,11 +24,21 @@ make
 
 This creates the `main` executable.
 
-Run the shell with:
+Run the shell interactively with:
 
 ```bash
 ./main
 ```
+
+To automatically run the commands from a file, pass the file path as an
+argument:
+
+```bash
+./main auto1.txt
+```
+
+The shell executes each command in the file. When the file reaches EOF, it
+switches back to standard input so you can continue entering commands.
 
 ## Usage
 

@@ -14,22 +14,37 @@
 
 int main(int argc, char *argv[])
 {
-	(void)argc;
-	(void)argv;
-	int status;
 	char buff[BUFF_SIZE + 1];
-
 	signal(SIGQUIT, SIG_IGN);
+
+	if(argc != 2){
+		fprintf(stderr,RED "Usage: %s [input_file]\n" WHITE, argv[0]);
+		exit(1);
+		
+	}
+
+	FILE *input = fopen(argv[1], "r");
+	if(input == NULL){
+		fprintf(stderr, "Error: Cannot open file %s\n", argv[1]);
+		exit(1);
+	}
 
 
 	while(1){
+
 		printf(GREEN "shell> " WHITE);
 
-		char *pt = fgets(buff, BUFF_SIZE, stdin);
+		char *pt = fgets(buff, BUFF_SIZE, input);
 
 		if(pt == NULL){
-			printf("Exit with signal\n");
-			exit(1);
+			if(input != stdin){
+				fclose(input);
+				input = stdin;
+				continue;
+			}else{
+				printf(RED "EOF\n" WHITE);
+				break;
+			}
 		}
 		if(buff[0] == '\n'){
 			continue;
@@ -55,7 +70,7 @@ int main(int argc, char *argv[])
 
 		pid_t pid = fork();
 		if (pid > 0){
-			wait(&status);
+			wait(NULL);
 			// printf("Child process exited with status: %d\n", WEXITSTATUS(status));
 		}else
 		{
@@ -75,7 +90,3 @@ int main(int argc, char *argv[])
 	printf(RED "shell exited\n" WHITE);
 
 }
-
-
-
-

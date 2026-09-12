@@ -28,9 +28,9 @@ void trim_quotes(char *ar[])
 
 void get_in_out_file(char *ar[], char **input_file, char **output_file)
 {
-	printf(GREEN "get_in_out_file called\n" WHITE);
-	for(int i = 0; ar[i]; i++)
-		printf(RED "ar[%d]: %s\n" WHITE, i, ar[i]);
+	// printf(GREEN "get_in_out_file called\n" WHITE);
+	// for(int i = 0; ar[i]; i++)
+	// 	printf(RED "ar[%d]: %s\n" WHITE, i, ar[i]);
 	
 	for(int i = 0; ar[i] != NULL; i++)
 	{
@@ -67,8 +67,8 @@ int handle_redirection(char *ar[])
 	
 	get_in_out_file(ar, &input_file, &output_file);
 
-	printf("Input file: %s\n", input_file);
-	printf("Output file: %s\n", output_file);
+	// printf("Input file: %s\n", input_file);
+	// printf("Output file: %s\n", output_file);
 
 
 	if(input_file != NULL){
