@@ -16,6 +16,7 @@ int main(int argc, char *argv[])
 {
 	char buff[BUFF_SIZE + 1];
 	signal(SIGQUIT, SIG_IGN);
+	int interactive_mode = 0;
 
 	if(argc != 2){
 		fprintf(stderr,RED "Usage: %s [input_file]\n" WHITE, argv[0]);
@@ -28,18 +29,20 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "Error: Cannot open file %s\n", argv[1]);
 		exit(1);
 	}
-
+	
 
 	while(1){
 
-		printf(GREEN "shell> " WHITE);
-
+		if(interactive_mode){
+			printf(GREEN "shell> " WHITE);
+		}
 		char *pt = fgets(buff, BUFF_SIZE, input);
 
 		if(pt == NULL){
 			if(input != stdin){
 				fclose(input);
 				input = stdin;
+				interactive_mode = 1;
 				continue;
 			}else{
 				printf(RED "EOF\n" WHITE);
